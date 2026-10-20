@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MCX Command Center — pusat kendali produktivitas pribadi.">
+  <meta name="theme-color" content="#0b1020">
+  <title>MCX Command Center</title>
+  <link rel="icon" type="image/png" href="LOGO.jpeg">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/main.js" defer></script>
+</head>
+<body>
+
+<div id="auth-screen" class="auth-screen">
+  <form id="auth-form" class="auth-card">
+
+    <div class="auth-brand">
+      <img src="LOGO.jpeg" alt="MCX Command Center" class="auth-logo">
+    </div>
+
+    <p class="eyebrow">MAKE. CREATE. XPAND.</p>
+    <h1 id="auth-title">Masuk ke Command Center</h1>
+    <p class="muted">Satu tempat buat mengatur projek, target, kebiasaan, dan keuangan.</p>
+
+    <label id="name-wrap" class="hidden">
+      Nama
+      <input id="auth-name" autocomplete="name" minlength="2" maxlength="80">
+    </label>
+
+    <label>
+      Email
+      <input id="auth-email" type="email" autocomplete="email" required maxlength="254">
+    </label>
+
+    <label>
+      Password
+      <input id="auth-password" type="password" autocomplete="current-password" required minlength="10" maxlength="72">
+    </label>
+
+    <button class="primary full" type="submit" id="auth-submit">Masuk</button>
+    <p id="auth-error" class="error" role="alert"></p>
+
+    <button type="button" class="link-button" id="auth-toggle">
+      Belum punya akun? Daftar
+    </button>
+  </form>
+</div>
+
+<div id="app-shell" class="shell hidden">
+
+  <aside class="sidebar">
+
+    <a class="brand" href="#dashboard" aria-label="MCX Command Center">
+      <img src="LOGO.jpeg" alt="MCX" class="sidebar-logo">
+      <span>MCX <small>COMMAND CENTER</small></span>
+    </a>
+
+    <p class="nav-label">WORKSPACE</p>
+
+    <nav id="navigation">
+      <button class="nav-item active" data-view="dashboard">▦ <span>Dashboard</span></button>
+      <button class="nav-item" data-view="tasks">☷ <span>Tasks</span></button>
+      <button class="nav-item" data-view="projects">◈ <span>Projects</span></button>
+      <button class="nav-item" data-view="goals">◎ <span>Goals &amp; Milestones</span></button>
+      <button class="nav-item" data-view="habits">↻ <span>Habit Tracker</span></button>
+      <button class="nav-item" data-view="fitness">♧ <span>Fitness</span></button>
+      <button class="nav-item" data-view="study">▤ <span>Study Planner</span></button>
+      <button class="nav-item" data-view="finance">↗ <span>Finance</span></button>
+      <button class="nav-item" data-view="savings">◉ <span>Savings</span></button>
+      <button class="nav-item" data-view="analytics">▥ <span>Analytics</span></button>
+      <button class="nav-item" data-view="reviews">☑ <span>Weekly Review</span></button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <p class="muted tiny">MAKE. CREATE. XPAND.</p>
+      <button id="logout-button" class="secondary full">Keluar</button>
+    </div>
+
+  </aside>
+
+  <main class="main">
+
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PERSONAL OPERATING SYSTEM</p>
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="user-pill">
+        <span class="status-dot"></span>
+        <span id="user-name">Pengguna</span>
+      </div>
+    </header>
+
+    <section id="view-dashboard" class="view">
+
+      <div class="hero">
+        <div>
+          <p class="eyebrow">SATU LANGKAH SETIAP HARI</p>
+          <h2>Bangun sesuatu yang berarti, bro.</h2>
+          <p>Fokus ke hal yang penting. Catat progres. Ulangi besok.</p>
+          <button class="primary" data-go="tasks">+ Tambah tugas</button>
+        </div>
+
+        <div class="hero-brand">
+          <img src="LOGO.jpeg" alt="MCX Command Center" class="hero-logo">
+        </div>
+      </div>
+
+      <div id="dashboard-stats" class="stats-grid"></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Mulai dari sini</h2>
+          <p class="muted">Pilih area yang ingin lu kerjakan.</p>
+        </div>
+      </div>
+
+      <div class="quick-grid" id="quick-grid"></div>
+
+      <div class="section-heading">
+        <div>
+          <h2>Data dan progres</h2>
+          <p class="muted">Ringkasan aktivitas akun lu.</p>
+        </div>
+        <button class="secondary" id="refresh-dashboard">Refresh</button>
+      </div>
+
+      <div id="dashboard-summary" class="panel"></div>
+    </section>
+
+    <section id="view-module" class="view hidden">
+
+      <div class="section-heading">
+        <div>
+          <h2 id="module-title">Tasks</h2>
+          <p id="module-description" class="muted">Kelola data lu.</p>
+        </div>
+        <button class="primary" id="add-button">+ Tambah</button>
+      </div>
+
+      <div id="module-form-wrap" class="panel hidden">
+        <form id="module-form">
+          <div id="form-fields" class="form-grid"></div>
+          <div class="form-actions">
+            <button class="primary" type="submit">Simpan</button>
+            <button class="secondary" type="button" id="cancel-form">Batal</button>
+          </div>
+          <p id="form-error" class="error"></p>
+        </form>
+      </div>
+
+      <div class="toolbar">
+        <input id="module-search" type="search" placeholder="Cari data..." aria-label="Cari data">
+        <button class="secondary" id="export-button">Ekspor JSON</button>
+      </div>
+
+      <div id="module-list" class="data-grid"></div>
+      <div id="module-empty" class="empty hidden">Belum ada data. Klik “Tambah” untuk memulai.</div>
+    </section>
+
+    <footer>
+      <span>MCX COMMAND CENTER</span>
+      <span>Data akun disimpan di database.</span>
+    </footer>
+
+  </main>
+</div>
+
+</body>
+</html>
